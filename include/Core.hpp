@@ -19,25 +19,3 @@
 // O------------------------------------------------------------------------------O
 #define is_key_pressed(olcPGE, keycode) olcPGE->GetKey(olc::Key::keycode).bHeld
 #define check_keyboard_shortcut(olcPGE, first, second) (is_key_pressed(olcPGE, first) && is_key_pressed(olcPGE, second))
-
-
-
-// O------------------------------------------------------------------------------O
-// | DEFAULT APPLICATION VALUES                                                   |
-// O------------------------------------------------------------------------------O
-#define DEFAULT_SCALE   1
-#define SCREEN_HEIGHT   720
-#define SCREEN_WIDTH    1280
-#define PIXEL_SCALE_HEIGHT  DEFAULT_SCALE
-#define PIXEL_SCALE_WIDTH   DEFAULT_SCALE
-
-#define DEFAULT_VELOCITY (SCREEN_WIDTH / 1000 * DEFAULT_SCALE)
-#define DEFAULT_ACCELERATION 0.0f
-
-
-
-// O------------------------------------------------------------------------------O
-// | ASSET VECTOR GLOBAL VALUES                                                   |
-// O------------------------------------------------------------------------------O
-#define ASSET_VEC_SIZE 1
-#define ASSET_VEC_SPACESHIP 0

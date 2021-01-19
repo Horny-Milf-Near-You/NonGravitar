@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.16)
 project(NonGravitar CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # olcPixelGameEngine directory
 set(OLCPGE_DIR "./library/olcPixelGameEngine/")
@@ -9,12 +10,12 @@ set(OLCPGE_DIR "./library/olcPixelGameEngine/")
 set(INCLUDE_DIR "./include/")
 
 # Compiler (g++) flags
-set(C_FLAGS "-I $(OLCPGE_DIR) -I $(INCLUDE_DIR)")
-add_compile_options(${C_FLAGS})
 add_definitions("-D DEBUG_MODE")
+add_compile_options(-Wall -Wextra)
 
-include_directories(${INCLUDE_DIR})
-include_directories(${OLCPGE_DIR})
+include_directories(${INCLUDE_DIR} ${OLCPGE_DIR})
 
-add_executable(NonGravitar NonGravitar.cpp source/Game.cpp )
+add_executable(NonGravitar NonGravitar.cpp source/Game.cpp)
+# Useless?
+# target_precompile_headers(NonGravitar PUBLIC "./library/olcPixelGameEngine/olcPixelGameEngine.h")
 target_link_libraries(NonGravitar X11 GL pthread png stdc++fs)
