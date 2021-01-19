@@ -1,0 +1,3 @@
+[submodule "library/olcPixelGameEngine"]
+	path = library/olcPixelGameEngine
+	url = https://github.com/OneLoneCoder/olcPixelGameEngine.git
