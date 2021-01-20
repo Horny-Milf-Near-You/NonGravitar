@@ -1,21 +1,27 @@
 #pragma once
 
-// Color definition for debugging printing
-#define RESET   "\033[0m"
-#define ERROR     "\033[31m" // Red color message is error
-#define WARNING  "\033[33m" // Yellow for warnings messages
-#define VERIFIED     "\033[32m" // Green color message for verified tests 
+class Logger
+{
+public:
+    static inline void Verified(const std::string_view &message) { PrettyPrint(SuccessCode, message); };
+    static inline void Warning(const std::string_view &message) { PrettyPrint(WarningCode, message); };
+    static inline void Error(const std::string_view &message) { PrettyPrint(ErrorCode, message); };
+    static inline void Info(const std::string_view &message) { PrettyPrint(InfoCode, message); };
 
-#ifdef DEBUG_MODE
-    #define print_debug_line(msg_type, msg) std::cout << msg_type << msg << RESET << std::endl
-#else
-    #define print_debug_line(msg_type, msg) 
-#endif 
+private:
+    enum Codes
+    {
+        ErrorCode,
+        SuccessCode,
+        WarningCode,
+        InfoCode,
+    };
 
+    static constexpr std::string_view mEncoding[4] = {"\033[31m", "\033[32m", "\033[33m", ""};
+    static constexpr std::string_view mResetCode = "\033[0m";
 
-
-// O------------------------------------------------------------------------------O
-// | USER INPUT MACROS                                                            |
-// O------------------------------------------------------------------------------O
-#define is_key_pressed(olcPGE, keycode) olcPGE->GetKey(olc::Key::keycode).bHeld
-#define check_keyboard_shortcut(olcPGE, first, second) (is_key_pressed(olcPGE, first) && is_key_pressed(olcPGE, second))
+    static inline void PrettyPrint(Codes msgType, const std::string_view &message)
+    {
+        std::cout << mEncoding[msgType] << message << mResetCode << std::endl;
+    }
+};
