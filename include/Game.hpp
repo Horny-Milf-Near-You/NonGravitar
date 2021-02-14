@@ -1,6 +1,6 @@
 #pragma once
 
-#include <olcPixelGameEngine.h>
+#include <stack>
 #include "Core.hpp"
 
 // O------------------------------------------------------------------------------O
@@ -15,6 +15,11 @@ public:
 	bool OnUserCreate() override;
 	bool OnUserUpdate(float fElapsedTime) override;
 	void OnUserPause();
+	bool OnUserDestroy() override
+	{
+		Logger::Warning("Deallocating Game object");
+		return (true);
+	};
 
 	bool IsKeyPressed(olc::Key keycode) { return GetKey(keycode).bHeld; };
 
@@ -26,4 +31,6 @@ private:
 	uint16_t mPlayerScore;
 	uint16_t mPlayerFuel;
 	uint16_t mPlayerHealth;
+
+	std::stack<std::unique_ptr<Scene>> mStackScene;
 };

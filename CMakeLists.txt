@@ -11,7 +11,8 @@ set(INCLUDE_DIR "./include/")
 
 # Compiler (g++) flags
 add_definitions("-D DEBUG_MODE")
-add_compile_options(-Wall -Wextra)
+# TODO add before release
+# add_compile_options(-Wall -Wextra)
 
 include_directories(${INCLUDE_DIR} ${OLCPGE_DIR})
 
