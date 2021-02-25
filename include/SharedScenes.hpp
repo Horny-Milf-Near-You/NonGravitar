@@ -8,7 +8,7 @@ public:
     const uint8_t titleScale = 5;
     const uint8_t subtitleScale = 2;
 
-    virtual std::pair<NextScene, std::optional<Scene>> Render(olc::PixelGameEngine &engine, float fElapsedTime) override
+    std::pair<NextScene, std::optional<Scene>> Render(olc::PixelGameEngine &engine, float fElapsedTime) override
     {
         // Calculate offset to center the title message and apply
         const olc::vf2d titleOffset = (engine.GetWindowSize() - engine.GetTextSize(titleMsg) * titleScale) / 2;
@@ -16,7 +16,7 @@ public:
 
         // Calculate the offset to center the subtitle message, the \n in the subtitle assure a bigger offset on the y axis
         olc::vf2d subtitleOffset = (engine.GetWindowSize() - engine.GetTextSize(subtitleMsg) * subtitleScale) / 2;
-        engine.DrawString(subtitleOffset + olc::vf2d(0, titleOffset.y), subtitleMsg, olc::WHITE, subtitleScale);
+        engine.DrawString(subtitleOffset + olc::vf2d(0, titleOffset.y / 2), subtitleMsg, olc::WHITE, subtitleScale);
 
         return std::make_pair(KeepCurrent, std::make_optional<Scene>());
     };
@@ -24,6 +24,15 @@ public:
 
 class PauseScene : public Scene
 {
-    //public:
-    //std::pair<NextScene, std::optional<Scene>> Render(olc::PixelGameEngine &engine, float fElapsedTime) override{};
+public:
+    const std::string pauseMsg = "Game Paused";
+    const uint8_t pauseScale = 5;
+
+    std::pair<NextScene, std::optional<Scene>> Render(olc::PixelGameEngine &engine, float fElapsedTime) override
+    {
+        const float xTitleOffset = (engine.GetWindowSize().x - engine.GetTextSize(pauseMsg).x * pauseScale) / 2;
+        engine.DrawString(olc::vf2d(xTitleOffset, 10), pauseMsg, olc::WHITE, pauseScale);
+
+        return std::make_pair(KeepCurrent, std::make_optional<Scene>());
+    };
 };

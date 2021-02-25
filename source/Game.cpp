@@ -28,7 +28,10 @@ bool Game::OnUserUpdate(float fElapsedTime)
 	Clear(olc::Pixel(22, 26, 46));
 
 	if (mStackScene.empty())
+	{
+		Logger::Error("The Scene Stack must always contain at least one scene!");
 		return false;
+	}
 
 	mStackScene.top()->Render(*this, fElapsedTime);
 
